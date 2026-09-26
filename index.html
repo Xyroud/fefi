@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para Stephany 💙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-1:#0d0e1f;
+    --night-2:#1b1d3d;
+    --grass-top:#6ea83a;
+    --grass-side:#4f7c28;
+    --dirt:#7a4a28;
+    --dirt-dark:#5e3a1f;
+    --stone:#8a8a8e;
+    --wood:#9c6b3e;
+    --wood-dark:#6e4b28;
+    --diamond:#5fd8ea;
+    --gold:#ffd76b;
+    --cream:#f5ecd8;
+    --ink:#2b2418;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:linear-gradient(var(--night-1),var(--night-2));
+    color:var(--cream);
+    font-family:'Quicksand',sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  h1,h2,.pixel{
+    font-family:'Press Start 2P',monospace;
+  }
+  section{
+    padding:64px 20px;
+    max-width:640px;
+    margin:0 auto;
+    position:relative;
+  }
+
+  .stars{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+  }
+  .star{
+    position:absolute;width:2px;height:2px;background:#fff;
+    opacity:.7;animation:twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.9}}
+
+  .hero{
+    min-height:92vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;gap:18px;
+  }
+  .pixel-heart{
+    width:108px;height:96px;
+    display:grid;grid-template-columns:repeat(9,12px);grid-template-rows:repeat(8,12px);
+    gap:0;
+  }
+  .pixel-heart div{width:12px;height:12px;}
+  .hf{background:#e5484d;}
+  .hg{background:#ff7a7d;}
+  .hero h1{
+    font-size:1.15rem;color:var(--cream);margin:0;letter-spacing:1px;
+    line-height:1.8;
+  }
+  .hero p{
+    color:#c9cadf;font-size:1rem;margin:0;
+  }
+  .scroll-hint{
+    margin-top:24px;font-size:.8rem;color:#8b8db3;
+    animation:bob 2s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+  .story h2{font-size:1rem;margin-bottom:36px;text-align:center;color:var(--gold);}
+  .craft-row{
+    display:flex;gap:14px;align-items:flex-start;
+    background:rgba(255,255,255,.04);
+    border:2px solid rgba(255,255,255,.08);
+    border-radius:6px;
+    padding:18px;margin-bottom:16px;
+  }
+  .craft-icon{
+    flex:0 0 auto;width:46px;height:46px;border-radius:4px;
+    display:flex;align-items:center;justify-content:center;font-size:22px;
+    box-shadow:inset -4px -4px 0 rgba(0,0,0,.25), inset 4px 4px 0 rgba(255,255,255,.08);
+  }
+  .ic-1{background:var(--grass-top);}
+  .ic-2{background:var(--stone);}
+  .ic-3{background:var(--diamond);}
+  .ic-4{background:var(--gold);}
+  .craft-text h3{
+    margin:0 0 6px;font-size:.95rem;color:var(--cream);font-weight:700;
+  }
+  .craft-text p{margin:0;color:#d6d7ea;font-size:.94rem;}
+
+  .chest-wrap{text-align:center;}
+  .chest-wrap h2{font-size:1rem;color:var(--gold);margin-bottom:28px;}
+  .chest{
+    width:140px;height:110px;margin:0 auto;position:relative;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .chest-base{
+    position:absolute;bottom:0;width:140px;height:74px;
+    background:var(--wood);border:4px solid var(--wood-dark);border-radius:4px;
+  }
+  .chest-base::after{
+    content:"";position:absolute;left:50%;top:0;bottom:0;width:10px;
+    transform:translateX(-50%);background:var(--gold);opacity:.85;
+  }
+  .chest-lid{
+    position:absolute;top:0;width:140px;height:46px;
+    background:var(--wood);border:4px solid var(--wood-dark);border-radius:6px 6px 2px 2px;
+    transform-origin:bottom center;
+    transition:transform .5s ease;
+  }
+  .chest-lid::after{
+    content:"";position:absolute;left:50%;bottom:-6px;width:16px;height:16px;
+    transform:translateX(-50%);background:var(--gold);border-radius:2px;
+  }
+  .chest.open .chest-lid{transform:rotateX(-115deg) translateY(4px);}
+  .chest-hint{margin-top:14px;font-size:.78rem;color:#9496bd;}
+  .letter{
+    max-width:520px;margin:30px auto 0;background:var(--cream);color:var(--ink);
+    border-radius:6px;padding:26px 22px;text-align:left;font-size:1rem;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    opacity:0;transform:translateY(14px);
+    max-height:0;overflow:hidden;
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .letter.show{opacity:1;transform:translateY(0);max-height:900px;padding:26px 22px;margin-top:30px;}
+  .letter p{margin:0 0 12px;}
+  .letter .sign{font-weight:700;text-align:right;color:#4f7c28;}
+
+  .support{
+    background:rgba(95,216,234,.06);
+    border:2px solid rgba(95,216,234,.25);
+    border-radius:8px;
+  }
+  .support h2{font-size:.95rem;color:var(--diamond);margin-bottom:18px;text-align:center;}
+  .support p{margin:0 0 14px;color:#e3e4f2;font-size:1rem;}
+  .support p:last-child{margin-bottom:0;}
+
+  .builder{text-align:center;}
+  .builder h2{font-size:1rem;color:var(--gold);margin-bottom:10px;}
+  .builder p.sub{color:#c9cadf;margin:0 0 26px;font-size:.95rem;}
+  .grid-heart{
+    width:180px;height:160px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(9,20px);grid-template-rows:repeat(8,20px);
+  }
+  .grid-heart .cell{
+    width:20px;height:20px;background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.04);
+    transition:background .25s ease, box-shadow .25s ease;
+  }
+  .grid-heart .cell.on{
+    background:#e5484d;
+    box-shadow:inset -3px -3px 0 rgba(0,0,0,.25), inset 3px 3px 0 rgba(255,255,255,.25);
+  }
+  .build-btn{
+    margin-top:30px;
+    font-family:'Press Start 2P',monospace;
+    font-size:.75rem;
+    background:var(--grass-top);
+    color:#173008;
+    border:none;border-bottom:4px solid var(--grass-side);
+    padding:16px 22px;border-radius:4px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .build-btn:active{transform:translateY(2px);border-bottom-width:2px;}
+  .final-msg{
+    margin-top:26px;font-size:1.05rem;color:var(--cream);opacity:0;
+    transition:opacity .8s ease;min-height:1.6em;
+  }
+  .final-msg.show{opacity:1;}
+
+  .floating-heart{
+    position:fixed;bottom:-20px;font-size:18px;pointer-events:none;z-index:5;
+    animation:rise 3.2s linear forwards;
+  }
+  @keyframes rise{
+    0%{transform:translateY(0) translateX(0) rotate(0deg);opacity:1;}
+    100%{transform:translateY(-70vh) translateX(var(--dx,0px)) rotate(20deg);opacity:0;}
+  }
+
+  footer{
+    text-align:center;padding:40px 20px 60px;color:#7a7ca0;font-size:.85rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<section class="hero">
+  <div class="pixel-heart" id="heroHeart"></div>
+  <h1>Para Stephany</h1>
+  <p>Un mundo construido bloque a bloque por Franko</p>
+  <div class="scroll-hint">↓ desliza para explorar ↓</div>
+</section>
+
+<section class="story">
+  <h2>NUESTRA HISTORIA</h2>
+
+  <div class="craft-row">
+    <div class="craft-icon ic-1">🌱</div>
+    <div class="craft-text">
+      <h3>El comienzo</h3>
+      <p>Como en toda partida nueva, empezamos generando un mundo desconocido: dos personas descubriendo si valía la pena construir algo juntos</p>
+    </div>
+  </div>
+
+  <div class="craft-row">
+    <div class="craft-icon ic-2">🌑</div>
+    <div class="craft-text">
+      <h3>La distancia</h3>
+      <p>Hubo un momenyo difícil. Nos alejamos los dos, cargando miedos que no supimos nombrar a tiempo. A veces el mapa se pone oscuro antes de encontrar el camino</p>
+    </div>
+  </div>
+
+  <div class="craft-row">
+    <div class="craft-icon ic-3">💬</div>
+    <div class="craft-text">
+      <h3>La conversación</h3>
+      <p>Decidimos sentarnos a hablar de verdad, sin escondernos. Ahí entendimos que valía más la pena intentarlo que quedarnos con el miedo</p>
+    </div>
+  </div>
+
+  <div class="craft-row">
+    <div class="craft-icon ic-4">✨</div>
+    <div class="craft-text">
+      <h3>Hoy</h3>
+      <p>Llevamos un mes siendo pareja oficial. Un mes construyendo, bloque a bloque, algo que ya no quiero soltar</p>
+    </div>
+  </div>
+</section>
+
+<section class="chest-wrap">
+  <h2>UN COFRE PARA TI</h2>
+  <div class="chest" id="chest">
+    <div class="chest-lid"></div>
+    <div class="chest-base"></div>
+  </div>
+  <div class="chest-hint">toca el cofre para abrirlo</div>
+
+  <div class="letter" id="letter">
+    <p>Fefi, si estás leyendo esto es porque abriste el cofre, con esa curiosidad tuya que no se deja ganar por el miedo, aunque a veces creas que sí</p>
+    <p>Contigo cada día se siente como entrar a un bioma nuevo: sorprendente, distinto, con ganas de seguir explorando. Gracias por quedarte, por querer intentar las cosas en vez de huir, queriendo darle un fin y terminar dandole una oportunidad a esto que estamos construyendo</p>
+    <p>Te elijo hoy, y las veces que hagan falta, siempre seras tú</p>
+    <p class="sign">— Franko 🕷️</p>
+  </div>
+</section>
+
+<section class="support">
+  <h2>PARA LO QUE VIENE</h2>
+  <p>Sé que se acerca un momento importante y que da miedo. No necesitas hacer nada para lo que no estés lista, ni ir más rápido de lo que tu ritmo permite</p>
+  <p>Pase lo que pase con esa conversación, quiero que sepas algo, no estás construyendo esto sola, simplemente no estas sola, voy a estar acá, esperándote con paciencia, del otro lado de la pantalla y en la vida real, el tiempo que sea necesario</p>
+  <p>Tu ritmo es el correcto</p>
+</section>
+
+<section class="builder">
+  <h2>CONSTRUYE UN CORAZÓN</h2>
+  <p class="sub">presiona el botón y mira qué aparece</p>
+  <div class="grid-heart" id="grid"></div>
+  <button class="build-btn" id="buildBtn">▶ construir</button>
+  <div class="final-msg" id="finalMsg"></div>
+</section>
+
+<footer>hecho con cariño (y algunos bloques) — Franko para Stephany</footer>
+
+<script>
+const starsEl = document.getElementById('stars');
+for(let i=0;i<60;i++){
+  const s = document.createElement('div');
+  s.className='star';
+  s.style.left = Math.random()*100+'vw';
+  s.style.top = Math.random()*100+'vh';
+  s.style.animationDelay = (Math.random()*3)+'s';
+  starsEl.appendChild(s);
+}
+
+const HEART = [
+ [0,1,1,0,0,0,1,1,0],
+ [1,1,1,1,0,1,1,1,1],
+ [1,1,1,1,1,1,1,1,1],
+ [1,1,1,1,1,1,1,1,1],
+ [0,1,1,1,1,1,1,1,0],
+ [0,0,1,1,1,1,1,0,0],
+ [0,0,0,1,1,1,0,0,0],
+ [0,0,0,0,1,0,0,0,0]
+];
+
+function buildHeart(container, altClass){
+  HEART.forEach(row=>{
+    row.forEach(v=>{
+      const d = document.createElement('div');
+      if(container.id==='heroHeart'){
+        d.className = v ? 'hf' : 'hg';
+      } else {
+        d.className = 'cell' + (v ? '' : '');
+        d.dataset.on = v;
+      }
+      container.appendChild(d);
+    });
+  });
+}
+buildHeart(document.getElementById('heroHeart'));
+buildHeart(document.getElementById('grid'));
+
+// chest interaction
+const chest = document.getElementById('chest');
+const letter = document.getElementById('letter');
+chest.addEventListener('click', ()=>{
+  chest.classList.toggle('open');
+  letter.classList.toggle('show');
+});
+
+// heart builder animation
+const btn = document.getElementById('buildBtn');
+const gridCells = Array.from(document.querySelectorAll('#grid .cell'));
+const finalMsg = document.getElementById('finalMsg');
+let building = false;
+
+function spawnHeart(){
+  const h = document.createElement('div');
+  h.className='floating-heart';
+  h.textContent = ['💙','❤️','✨'][Math.floor(Math.random()*3)];
+  h.style.left = (20+Math.random()*60)+'vw';
+  h.style.setProperty('--dx', (Math.random()*80-40)+'px');
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),3300);
+}
+
+btn.addEventListener('click', ()=>{
+  if(building) return;
+  building = true;
+  finalMsg.classList.remove('show');
+  finalMsg.textContent='';
+  gridCells.forEach(c=>c.classList.remove('on'));
+
+  const onCells = gridCells.filter(c=>c.dataset.on==='1');
+  onCells.forEach((c,i)=>{
+    setTimeout(()=>c.classList.add('on'), i*35);
+  });
+
+  const totalTime = onCells.length*35 + 300;
+  setTimeout(()=>{
+    finalMsg.textContent = 'Te amodoro, Stephany 💙 — con cariño, Franko';
+    finalMsg.classList.add('show');
+    const heartInterval = setInterval(spawnHeart, 180);
+    setTimeout(()=>{ clearInterval(heartInterval); building=false; }, 2200);
+  }, totalTime);
+});
+</script>
+
+</body>
+</html>

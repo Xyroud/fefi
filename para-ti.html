@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Para Fefi · En otra vida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Press+Start+2P&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#0a0a1f;
+  --noche2:#14102e;
+  --oro:#e8c872;
+  --rosa:#f2a7b8;
+  --rojo:#c0392b;
+  --lila:#9b7fe0;
+  --texto:#ece8f7;
+  --suave:#b8b0d0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:radial-gradient(ellipse at 20% 0%,#1f1747 0%,var(--noche) 55%) fixed;
+  color:var(--texto);
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+#cielo{position:fixed;inset:0;z-index:0;pointer-events:none}
+#petalos{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.petalo{
+  position:absolute;top:-30px;width:12px;height:16px;
+  background:radial-gradient(circle at 30% 30%,#ffe3ea,var(--rosa));
+  border-radius:80% 0 80% 0;opacity:.75;
+  animation:caer linear infinite;
+}
+@keyframes caer{
+  to{transform:translate3d(var(--dx),110vh,0) rotate(540deg)}
+}
+main{position:relative;z-index:2}
+section{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:5rem 1.25rem;text-align:center;
+}
+h1,h2{font-family:'Cinzel',serif;font-weight:400;letter-spacing:.12em}
+h1{font-size:clamp(2rem,6vw,4rem);color:var(--oro);text-shadow:0 0 30px rgba(232,200,114,.4)}
+h2{font-size:clamp(1.4rem,4vw,2.2rem);color:var(--oro);margin-bottom:.6rem}
+.sub{color:var(--suave);font-style:italic;max-width:34rem;margin:0 auto 2rem}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 1.2s,transform 1.2s}
+.reveal.on{opacity:1;transform:none}
+
+#hero{position:relative}
+.rueda{width:min(78vw,400px);aspect-ratio:1;margin-bottom:1.5rem;animation:gira 120s linear infinite}
+.rueda text{fill:var(--oro);font-size:22px;text-anchor:middle;dominant-baseline:middle;font-family:'Cinzel',serif}
+.rueda circle,.rueda line{stroke:var(--oro);fill:none;opacity:.5}
+@keyframes gira{to{transform:rotate(360deg)}}
+.firma-signos{margin-top:.5rem;color:var(--suave);letter-spacing:.2em;font-size:1rem}
+.btn{
+  margin-top:2rem;background:transparent;color:var(--oro);
+  border:1px solid var(--oro);padding:.7rem 1.6rem;
+  font-family:'Cinzel',serif;letter-spacing:.15em;font-size:.95rem;
+  cursor:pointer;border-radius:999px;transition:.3s;
+}
+.btn:hover{background:var(--oro);color:var(--noche);box-shadow:0 0 25px rgba(232,200,114,.5)}
+.flecha{position:absolute;bottom:1.5rem;color:var(--suave);animation:rebote 2s infinite;font-size:.9rem;letter-spacing:.2em}
+@keyframes rebote{50%{transform:translateY(8px)}}
+
+.cartas{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;max-width:1000px;width:100%}
+.carta{perspective:1000px;height:280px;cursor:pointer}
+.carta-in{position:relative;width:100%;height:100%;transition:transform .9s;transform-style:preserve-3d}
+.carta.vuelta .carta-in{transform:rotateY(180deg)}
+.cara{
+  position:absolute;inset:0;backface-visibility:hidden;
+  border:1px solid rgba(232,200,114,.35);border-radius:16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1.4rem;background:linear-gradient(160deg,rgba(40,30,90,.7),rgba(15,12,40,.8));
+  backdrop-filter:blur(4px);
+}
+.cara.atras{transform:rotateY(180deg);font-size:1.08rem;line-height:1.55;overflow:auto}
+.cara .glifo{font-size:2.6rem;color:var(--oro);margin-bottom:.6rem}
+.cara h3{font-family:'Cinzel',serif;font-weight:400;color:var(--oro);letter-spacing:.1em}
+.cara small{color:var(--suave);margin-top:.5rem}
+
+.const-wrap{position:relative;width:min(92vw,720px);aspect-ratio:16/10;border:1px solid rgba(155,127,224,.3);border-radius:18px;background:rgba(10,10,31,.55)}
+.const-wrap svg{position:absolute;inset:0;width:100%;height:100%}
+.const-wrap line{stroke:var(--oro);stroke-width:1.2;opacity:.7;stroke-dasharray:400;stroke-dashoffset:400;animation:trazo 1.2s forwards}
+@keyframes trazo{to{stroke-dashoffset:0}}
+.estrella{cursor:pointer;fill:#fff;filter:drop-shadow(0 0 6px var(--oro));animation:titila 2.5s infinite}
+.estrella.vista{fill:var(--oro)}
+@keyframes titila{50%{opacity:.45}}
+.recuerdo{min-height:5rem;max-width:36rem;margin-top:1.4rem;color:var(--texto);font-style:italic}
+
+#mine{background:linear-gradient(#0a0a1f,#12202a 70%,#1b2a14)}
+.px{font-family:'Press Start 2P',monospace;line-height:1.8}
+#mine h2{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,3vw,1.4rem);color:#ffd84d;text-shadow:3px 3px 0 #3a2f00}
+.luna-px{width:48px;height:48px;background:#f5f2d0;box-shadow:inset -12px -12px 0 #d8d3a0;margin-bottom:1.5rem;image-rendering:pixelated}
+.corazones{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:1rem 0 .4rem}
+.corazones svg{width:28px;height:28px;cursor:pointer;image-rendering:pixelated;transition:transform .15s}
+.corazones svg:hover{transform:scale(1.2)}
+.corazones .v{fill:#3b3b3b}
+.corazones .lleno .v{fill:#e53935}
+.corazones .lleno .b{fill:#ff8a80}
+.corazones .b{fill:transparent}
+.estado{font-size:.6rem;color:#d7d7d7;min-height:3rem;max-width:30rem}
+.hotbar{display:flex;gap:4px;margin:1.5rem 0 .8rem;padding:4px;background:#3a3a3a;border:4px solid #1c1c1c;flex-wrap:wrap;justify-content:center}
+.slot{
+  width:58px;height:58px;background:#8b8b8b;display:flex;align-items:center;justify-content:center;
+  border:4px solid;border-color:#373737 #fff #fff #373737;font-size:1.6rem;cursor:pointer;
+}
+.slot:hover,.slot.sel{background:#aaa;outline:4px solid #fff;outline-offset:-4px}
+.item-nombre{font-size:.62rem;color:#fff;background:#1a0a2e;border:3px solid #2b0a5e;padding:.8rem 1rem;max-width:30rem;min-height:4.2rem}
+.bloques{display:flex;margin-top:2rem}
+.bloque{width:34px;height:34px;image-rendering:pixelated}
+.hierba{background:linear-gradient(#5fa83a 30%,#7a5230 30%);}
+.tierra{background:#7a5230}
+.piedra{background:#7d7d7d}
+.antorcha{position:relative;width:12px;height:36px;margin:0 22px;background:#8b5a2b;align-self:flex-end}
+.antorcha::before{
+  content:"";position:absolute;top:-10px;left:0;width:12px;height:12px;background:#ffb300;
+  box-shadow:0 0 22px 8px rgba(255,170,0,.55);animation:llama .4s infinite alternate;
+}
+@keyframes llama{to{background:#ff7a00;box-shadow:0 0 28px 12px rgba(255,120,0,.5)}}
+.toast{
+  position:fixed;top:1rem;right:1rem;z-index:50;width:min(320px,90vw);
+  background:#2a2a2a;border:4px solid #000;outline:3px solid #8b8b8b;outline-offset:-7px;
+  padding:1rem 1rem 1rem 1.2rem;display:flex;gap:.8rem;align-items:center;
+  font-family:'Press Start 2P',monospace;font-size:.55rem;line-height:1.8;
+  transform:translateX(120%);transition:transform .6s;
+}
+.toast.on{transform:none}
+.toast b{color:#ffd84d;display:block}
+.toast span{color:#fff}
+.toast .ico{font-size:1.8rem}
+
+#mulan{background:linear-gradient(#1b2a14,#2a0f14 40%,#14102e)}
+.farol{font-size:3rem;filter:drop-shadow(0 0 14px #ff5a36);animation:balanceo 3s ease-in-out infinite;transform-origin:top}
+@keyframes balanceo{50%{transform:rotate(6deg)}}
+.espejo{
+  width:min(80vw,260px);aspect-ratio:3/4;margin:1.5rem auto;border-radius:50% 50% 12px 12px/40% 40% 12px 12px;
+  border:5px solid var(--oro);background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.35),rgba(120,110,190,.25) 60%);
+  display:flex;align-items:center;justify-content:center;padding:1.5rem;cursor:pointer;
+  box-shadow:0 0 40px rgba(232,200,114,.25);font-style:italic;font-size:1.1rem;transition:.5s;
+}
+.espejo:hover{box-shadow:0 0 60px rgba(232,200,114,.55)}
+.hilo-wrap{width:min(90vw,520px);margin:1.5rem auto 0}
+.hilo-wrap path{stroke:var(--rojo);stroke-width:2.5;fill:none;stroke-dasharray:700;stroke-dashoffset:700;transition:stroke-dashoffset 3s}
+.hilo-wrap.on path{stroke-dashoffset:0}
+.hilo-wrap text{fill:var(--oro);font-size:26px;text-anchor:middle}
+
+#portal-sec{background:linear-gradient(#14102e,#0a0a1f)}
+.portal{
+  position:relative;width:150px;height:210px;cursor:pointer;margin:1rem auto;
+  border:22px solid #1a1026;border-image:none;
+  box-shadow:0 0 0 4px #2b1a45,0 0 40px rgba(155,60,255,.35);
+  background:#0c0618;overflow:hidden;
+}
+.portal::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,#7a2bd6 0 12px,#a24bff 12px 24px,#5b1ba8 24px 36px);
+  background-size:200% 200%;opacity:.85;animation:remolino 5s linear infinite;
+  transition:.8s;
+}
+.portal:hover::after{filter:brightness(1.3)}
+.portal.abierto::after{filter:brightness(2) saturate(1.4);opacity:0}
+@keyframes remolino{to{background-position:100px 100px}}
+.carta-final{
+  max-width:38rem;margin-top:2rem;text-align:left;min-height:18rem;
+  padding:1.8rem;border-left:2px solid var(--oro);background:rgba(20,16,46,.55);
+  font-size:1.3rem;white-space:pre-wrap;opacity:0;transition:opacity 1s;
+}
+.carta-final.on{opacity:1}
+.cursor{display:inline-block;width:2px;height:1.1em;background:var(--oro);margin-left:2px;vertical-align:text-bottom;animation:parp 1s infinite}
+@keyframes parp{50%{opacity:0}}
+footer{position:relative;z-index:2;text-align:center;padding:3rem 1rem 4rem;color:var(--suave);font-size:1rem;letter-spacing:.1em}
+.estela{position:fixed;width:140px;height:2px;background:linear-gradient(90deg,transparent,#fff);z-index:3;pointer-events:none;transform:rotate(30deg);animation:fugaz 1.3s forwards}
+@keyframes fugaz{from{opacity:1;transform:translate(0,0) rotate(30deg)}to{opacity:0;transform:translate(420px,240px) rotate(30deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<canvas id="cielo"></canvas>
+<div id="petalos"></div>
+
+<div class="toast" id="toast">
+  <div class="ico">🏆</div>
+  <div><b>¡Logro desbloqueado!</b><span>Quererte sin condiciones</span></div>
+</div>
+
+<main>
+
+<section id="hero">
+  <svg class="rueda" viewBox="0 0 400 400" id="rueda" aria-hidden="true">
+    <circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="6" style="fill:#e8c872;opacity:1"/>
+  </svg>
+  <h1 class="reveal" id="titulo">Para ti, <span id="n-ella"></span></h1>
+  <p class="sub reveal" style="margin-top:1rem">Las palabras que no supe decir a tiempo, escritas bajo el mismo cielo que compartimos.</p>
+  <p class="firma-signos reveal"><span id="s-yo"></span> &nbsp;✦&nbsp; <span id="s-ella"></span></p>
+  <p class="sub reveal" style="margin:2rem auto 0;font-size:1.1rem">Antes de apretar este botón, cierra los ojos y pide un deseo ✦</p>
+  <button class="btn reveal" id="deseo" style="margin-top:1rem">Ya pedí mi deseo ✦</button>
+  <div class="flecha">DESLIZA ↓</div>
+</section>
+
+<section>
+  <h2 class="reveal">Lo que no te dije</h2>
+  <p class="sub reveal">Toca cada carta. Están escritas sin pedirte nada</p>
+  <div class="cartas reveal">
+    <div class="carta"><div class="carta-in">
+      <div class="cara"><div class="glifo">☉</div><h3>Gracias</h3><small>toca para girar</small></div>
+      <div class="cara atras">Gracias por haberme permitido conocer tu mundo. Gracias por las risas tontas, por los días normales que contigo se sentían especiales, me hiciste mejor persona y eso nadie me lo va a quitar, gracias de verdad...</div>
+    </div></div>
+    <div class="carta"><div class="carta-in">
+      <div class="cara"><div class="glifo">☽</div><h3>Lo que callé</h3><small>toca para girar</small></div>
+      <div class="cara atras">Cuando decidiste terminar, me quedé en silencio, no me salieron las palabras, enserio no fue por no sentir, sino porque ya habias dicho lo que tenias que decir y simplemente lo mejor que pude hacer fue escuharte. Pero por dentro había mucho que quería decirte</div>
+    </div></div>
+    <div class="carta"><div class="carta-in">
+      <div class="cara"><div class="glifo">♀</div><h3>Tu decisión</h3><small>toca para girar</small></div>
+      <div class="cara atras">No entiendo del todo tu decisión pero respeté tu decisión, supongo que amar también es aceptar que alguien necesita otro camino. No hay rencor en todo esto, solo cariño y mucha de nostalgia</div>
+    </div></div>
+    <div class="carta"><div class="carta-in">
+      <div class="cara"><div class="glifo">✧</div><h3>Te deseo</h3><small>toca para girar</small></div>
+      <div class="cara atras">Te deseo calma, abrazos que se queden, sueños cumplidos y noches de cielo despejado. Ojalá la vida te devuelva todo el amor que regalaste y espero desde el fondo de mi corazón poder estar ahí para ti aun si no es de forma romantica, sabes que este bobo te amara hoy y siempre...</div>
+    </div></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="reveal">Nuestra constelación</h2>
+  <p class="sub reveal">Cada estrella es un recuerdo. Tócalas en orden y mira qué dibujan</p>
+  <div class="const-wrap reveal">
+    <svg viewBox="0 0 800 500" id="const"></svg>
+  </div>
+  <p class="recuerdo" id="recuerdo">Empieza por la primera estrella ✦</p>
+</section>
+
+<section id="mine">
+  <div class="luna-px reveal"></div>
+  <h2 class="reveal">Modo supervivencia</h2>
+  <p class="estado px reveal" style="margin-top:1rem">Toca corazón por corazón, en orden, para leer el mensaje de cada uno</p>
+  <div class="corazones reveal" id="corazones"></div>
+  <p class="estado px" id="estado">Salud: 0 / 10</p>
+
+  <div class="hotbar reveal" id="hotbar"></div>
+  <div class="item-nombre px" id="itemTxt">Elige un objeto del inventario</div>
+
+  <div class="bloques reveal">
+    <div class="bloque hierba"></div><div class="bloque hierba"></div><div class="antorcha"></div>
+    <div class="bloque hierba"></div><div class="bloque hierba"></div><div class="bloque hierba"></div>
+  </div>
+  <div class="bloques" style="margin-top:0">
+    <div class="bloque tierra"></div><div class="bloque tierra"></div><div class="bloque piedra"></div>
+    <div class="bloque tierra"></div><div class="bloque piedra"></div><div class="bloque tierra"></div><div class="bloque piedra"></div>
+  </div>
+</section>
+
+<section id="mulan">
+  <div class="farol">🏮</div>
+  <h2 class="reveal">Una flor que abre a destiempo</h2>
+  <p class="sub reveal">Como en los cuentos antiguos, algunos caminos se separan sin dejar de ser hermosos</p>
+  <div class="espejo reveal" id="espejo">Toca el espejo</div>
+  <div class="hilo-wrap reveal" id="hilo">
+    <svg viewBox="0 0 520 120">
+      <path d="M40 60 C 140 -10, 200 130, 260 60 S 400 0, 480 60"/>
+      <text x="40" y="100">✦</text><text x="480" y="100">✦</text>
+    </svg>
+  </div>
+  <p class="sub reveal" style="margin-top:.5rem;font-size:1rem">Dicen que un hilo rojo une a quienes se van a encontrara, a veces el hilo se estira, pero no se rompe</p>
+</section>
+
+<section id="portal-sec">
+  <h2 class="reveal">Quizás en otra vida...</h2>
+  <p class="sub reveal">Hay un portal que lleva a otro universo. Cruza si quieres leer la última carta</p>
+  <div class="portal reveal" id="portal" title="Entrar"></div>
+  <div class="carta-final" id="cartaFinal"></div>
+</section>
+
+</main>
+
+<footer>
+  Hecho con cariño por <span id="n-yo"></span>, para <span id="n-ella2"></span>, bajo el cielo de <span id="fecha"></span> ✦
+</footer>
+
+<script>
+const CONFIG = {
+  ella: "Fefi",              
+  yo: "Franko",               
+  signoElla: "♏ Escorpio",    
+  signoYo: "♌ Leo",         
+  recuerdos: [
+    "La primera vez que te vi reír de verdad, supe que ibas a importarme.",
+    "Aquellas conversaciones largas hasta que se nos olvidaba la hora.",
+    "Tu forma de convertir un día cualquiera en algo especial",
+    "Los silencios cómodos, nunca supe que fueran un regalo hasta ahora",
+    "Las veces que nos apoyamos cuando el mundo pesaba demasiado",
+    "Ese día que parecía normal y hoy recuerdo con una sonrisa",
+    "Y la despedida: triste, pero sin odio. Eso también fue, es y sera amor"
+  ],
+  items: [
+    ["🗡️","Espada de honor","Pelee por esto con respeto: sin gritos, honor ante todo"],
+    ["🧭","Brújula","Siempre apuntó hacia ti, ahora te deseo que apunte hacia lo que te haga feliz"],
+    ["💎","Diamante raro","Lo que vivimos fue valioso, no todos encuentran uno en su camino"],
+    ["🍎","Manzana dorada","Para que cures cualquier tristeza... Cuídate mucho"],
+    ["🛏️","Cama: punto de reaparición guardado","Dentro de mí quedó guardado un lugar para los buenos recuerdos"]
+  ],
+  salud: [
+    "Primer corazón: tu sonrisa",
+    "Segundo corazón: tus abrazos",
+    "Tercero: las bromas que solo nosotros entendíamos",
+    "Cuarto: cómo te preocupabas por mí",
+    "Quinto: tus sueños y cómo me los contabas",
+    "Sexto: las mañanas en el liceo sin hacer nada, pero juntos",
+    "Séptimo: tu forma de ser tu misma",
+    "Octavo: lo que aprendí a tu lado",
+    "Noveno: el valor que tuviste en todo este proceso",
+    "Décimo: la paz con la que hoy te recuerdo... Salud completa."
+  ],
+  espejo: [
+    "Veo a alguien valiente, que supo escuchar su propio corazón",
+    "Veo a quien me enseñó que amar también es dejar ir",
+    "Veo a alguien que merece todo lo bueno y más"
+  ],
+  final: `Si en otra vida nos cruzamos de nuevo, ojalá sea en un momento en que los dos estemos listos
+
+No te escribo esto para pedirte que vuelvas... Te escribo porque guardar tantas cosas dentro pesaba, y porque mereces saber que te recuerdo con harto cariño y aprecio
+
+Respeté tu decisión y la sigo respetando. Fuiste una de las mejores partes de mi historia
+
+Si algún día miras las estrellas y sientes algo familiar, quizás sea yo, deseándote lo mejor desde "lejos"...
+Esto no es el fin, es solo un continuara, dejemos pendiente esto. Tomemos las riendas a nuestras vidas, cada uno trabajando por su propio camino, hasta que estemos preparados para retomar esta gran historia de amor.
+
+Cuídate mucho, Fefi.
+Siempre, con cariño.
+— Franko`
+};
+
+document.getElementById('n-ella').textContent = CONFIG.ella;
+document.getElementById('n-yo').textContent = CONFIG.yo;
+document.getElementById('n-ella2').textContent = CONFIG.ella;
+document.getElementById('s-ella').textContent = CONFIG.signoElla;
+document.getElementById('s-yo').textContent = CONFIG.signoYo;
+document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-CL',{month:'long',year:'numeric'});
+
+(function(){
+  const glifos = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+  const svg = document.getElementById('rueda');
+  const ns = 'http://www.w3.org/2000/svg';
+  glifos.forEach((g,i)=>{
+    const a = (i/12)*Math.PI*2 - Math.PI/2;
+    const t = document.createElementNS(ns,'text');
+    t.setAttribute('x', 200+Math.cos(a)*160);
+    t.setAttribute('y', 200+Math.sin(a)*160);
+    t.textContent = g + '\uFE0E';
+    svg.appendChild(t);
+    const l = document.createElementNS(ns,'line');
+    const b = a + Math.PI/12;
+    l.setAttribute('x1',200+Math.cos(b)*130);l.setAttribute('y1',200+Math.sin(b)*130);
+    l.setAttribute('x2',200+Math.cos(b)*190);l.setAttribute('y2',200+Math.sin(b)*190);
+    svg.appendChild(l);
+  });
+})();
+
+const cv = document.getElementById('cielo'), cx = cv.getContext('2d');
+let W,H,estrellas=[],mx=0,my=0;
+function resize(){
+  W = cv.width = innerWidth; H = cv.height = innerHeight;
+  estrellas = Array.from({length:Math.min(220,Math.floor(W*H/6000))},()=>({
+    x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.2,
+    p:Math.random()*Math.PI*2,v:Math.random()*.02+.005,d:Math.random()*.04+.01
+  }));
+}
+addEventListener('resize',resize);resize();
+addEventListener('pointermove',e=>{mx=(e.clientX/W-.5);my=(e.clientY/H-.5)});
+(function loop(){
+  cx.clearRect(0,0,W,H);
+  estrellas.forEach(s=>{
+    s.p+=s.v;
+    const a = .5+.5*Math.sin(s.p);
+    cx.globalAlpha = .25+.75*a;
+    cx.fillStyle = '#fff';
+    cx.beginPath();
+    cx.arc(s.x - mx*s.d*200, s.y - my*s.d*200, s.r, 0, 7);
+    cx.fill();
+  });
+  requestAnimationFrame(loop);
+})();
+
+function estrellaFugaz(){
+  const e = document.createElement('div');
+  e.className='estela';
+  e.style.left = (Math.random()*60)+'vw';
+  e.style.top = (Math.random()*35)+'vh';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),1400);
+}
+setInterval(()=>{ if(Math.random()<.5) estrellaFugaz(); },5000);
+document.getElementById('deseo').addEventListener('click',()=>{
+  estrellaFugaz();setTimeout(estrellaFugaz,300);
+  const b = document.getElementById('deseo');
+  b.textContent = 'Deseo enviado al universo ✦';
+  const dd = document.createElement('p');
+  dd.className = 'sub on';
+  dd.style.cssText = 'margin-top:1rem;font-size:1.05rem';
+  dd.textContent = 'Que el universo lo escuche, Fefi.';
+  if(!document.getElementById('deseoMsg')){ dd.id = 'deseoMsg'; b.insertAdjacentElement('afterend', dd); }
+});
+
+(function(){
+  const c = document.getElementById('petalos');
+  for(let i=0;i<22;i++){
+    const p = document.createElement('div');
+    p.className='petalo';
+    p.style.left = Math.random()*100+'vw';
+    p.style.animationDuration = (9+Math.random()*10)+'s';
+    p.style.animationDelay = (-Math.random()*15)+'s';
+    p.style.setProperty('--dx',(Math.random()*160-80)+'px');
+    const s = .6+Math.random()*.9;
+    p.style.transform = `scale(${s})`;
+    c.appendChild(p);
+  }
+})();
+
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); } });
+},{threshold:.2});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+document.querySelectorAll('.carta').forEach(c=>{
+  c.addEventListener('click',()=>c.classList.toggle('vuelta'));
+});
+
+(function(){
+  const svg = document.getElementById('const');
+  const ns = 'http://www.w3.org/2000/svg';
+  const pts = [[110,330],[220,200],[330,270],[430,130],[540,220],[630,120],[700,300]];
+  let siguiente = 0;
+  const txt = document.getElementById('recuerdo');
+  pts.forEach((p,i)=>{
+    const c = document.createElementNS(ns,'circle');
+    c.setAttribute('cx',p[0]);c.setAttribute('cy',p[1]);c.setAttribute('r',9);
+    c.setAttribute('class','estrella');
+    c.style.animationDelay = (i*.3)+'s';
+    c.addEventListener('click',()=>{
+      if(i>siguiente){ txt.textContent = 'Ve en orden, el cielo tiene su propio ritmo ✦'; return; }
+      if(i<siguiente){ txt.textContent = CONFIG.recuerdos[i]; return; }
+      c.classList.add('vista');
+      txt.textContent = CONFIG.recuerdos[i];
+      if(i>0){
+        const l = document.createElementNS(ns,'line');
+        l.setAttribute('x1',pts[i-1][0]);l.setAttribute('y1',pts[i-1][1]);
+        l.setAttribute('x2',p[0]);l.setAttribute('y2',p[1]);
+        svg.insertBefore(l,svg.firstChild);
+      }
+      siguiente++;
+      if(siguiente===pts.length){
+        setTimeout(()=>{ txt.textContent = CONFIG.recuerdos[pts.length-1] + '  —  Así quedó escrita nuestra constelación.'; },1500);
+      }
+    });
+    svg.appendChild(c);
+  });
+})();
+
+(function(){
+  const cont = document.getElementById('corazones');
+  const estado = document.getElementById('estado');
+  const mapa = [
+    '.XX.XX.',
+    'XXXXXXX',
+    'XXXXXXX',
+    'XXXXXXX',
+    '.XXXXX.',
+    '..XXX..',
+    '...X...'
+  ];
+  const ns = 'http://www.w3.org/2000/svg';
+  let llenos = 0;
+  const hearts = [];
+  for(let i=0;i<10;i++){
+    const s = document.createElementNS(ns,'svg');
+    s.setAttribute('viewBox','0 0 7 7');
+    mapa.forEach((row,y)=>[...row].forEach((ch,x)=>{
+      if(ch==='X'){
+        const r = document.createElementNS(ns,'rect');
+        r.setAttribute('x',x);r.setAttribute('y',y);r.setAttribute('width',1);r.setAttribute('height',1);
+        r.setAttribute('class','v');
+        s.appendChild(r);
+      }
+    }));
+    const brillo = document.createElementNS(ns,'rect');
+    brillo.setAttribute('x',1);brillo.setAttribute('y',1);brillo.setAttribute('width',1);brillo.setAttribute('height',1);
+    brillo.setAttribute('class','b');
+    s.appendChild(brillo);
+    s.addEventListener('click',()=>{
+      if(i===llenos){
+        s.classList.add('lleno'); estado.textContent = CONFIG.salud[i]; llenos++;
+        if(llenos===10) estado.textContent += ' ✦ Salud: 10 / 10';
+      } else if(i<llenos){
+        estado.textContent = CONFIG.salud[i];
+      } else {
+        estado.textContent = 'Rellena los corazones en orden.';
+      }
+    });
+    cont.appendChild(s); hearts.push(s);
+  }
+
+  const hb = document.getElementById('hotbar'), tx = document.getElementById('itemTxt');
+  CONFIG.items.forEach(it=>{
+    const d = document.createElement('div');
+    d.className='slot'; d.textContent = it[0];
+    d.addEventListener('click',()=>{
+      document.querySelectorAll('.slot').forEach(s=>s.classList.remove('sel'));
+      d.classList.add('sel');
+      tx.innerHTML = '<span style="color:#ffd84d">'+it[1]+'</span><br><br>'+it[2];
+    });
+    hb.appendChild(d);
+  });
+
+  const toast = document.getElementById('toast');
+  new IntersectionObserver((es,ob)=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      toast.classList.add('on');
+      setTimeout(()=>toast.classList.remove('on'),4500);
+      ob.disconnect();
+    }});
+  },{threshold:.35}).observe(document.getElementById('mine'));
+})();
+
+(function(){
+  const e = document.getElementById('espejo');
+  let i = 0;
+  e.addEventListener('click',()=>{
+    e.textContent = CONFIG.espejo[i % CONFIG.espejo.length]; i++;
+  });
+  new IntersectionObserver((es,ob)=>{
+    es.forEach(x=>{ if(x.isIntersecting){ x.target.classList.add('on'); ob.disconnect(); } });
+  },{threshold:.5}).observe(document.getElementById('hilo'));
+})();
+
+(function(){
+  const portal = document.getElementById('portal');
+  const carta = document.getElementById('cartaFinal');
+  let abierto = false;
+  portal.addEventListener('click',()=>{
+    if(abierto) return; abierto = true;
+    portal.classList.add('abierto');
+    carta.classList.add('on');
+    let i = 0;
+    const t = CONFIG.final;
+    const cur = '<span class="cursor"></span>';
+    (function escribir(){
+      carta.innerHTML = t.slice(0,i).replace(/</g,'&lt;') + cur;
+      if(i < t.length){ i++; setTimeout(escribir, 38); }
+    })();
+  });
+})();
+</script>
+</body>
+</html>
